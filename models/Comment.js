@@ -38,4 +38,4 @@ Comment.init(
     }
 );
 
-module.exports = { User, Post, Comment };
+module.exports = Comment;
