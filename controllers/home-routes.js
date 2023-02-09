@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require("../models");
 const withAuth = require("../utils/auth");
+const scripts = [{script: "../public/js/login.js"}];
 
 router.get("/", async (req, res) => {
     try {
@@ -32,7 +33,7 @@ router.get('/login', (req, res) => {
       return;
     }
     
-    res.render('login');
+    res.render('login', scripts);
   });
 
 module.exports = router;
