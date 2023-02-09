@@ -8,32 +8,43 @@
     <title>Tech Blog</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+        crossorigin="anonymous">
 </head>
 
 <body>
-    <header>
-        <h1>The Tech Blog</h1>
+    <header style="background-color: var(--bs-success-text)">
+        <h1 class="text-light text-center">The Tech Blog</h1>
+        <nav class="navbar navbar-expand-lg"
+            style="background-color: var(--bs-success-text)">
+            <div class="navbar-nav justify-content-start container-fluid">
+                <a href="/" class="text-light mx-4">Home</a>
+                {{#if loggedIn}}
+                <a href="/dashboard" class="text-light mx-4">Dashboard</a>
+                <button id="logout"
+                    class="btn-no-style text-light mx-4">Logout</button>
+                {{else}}
+                <a href="/login" class="text-light mx-4">Login</a>
+                {{/if}}
+            </div>
+        </nav>
     </header>
-    <nav>
-        <a href="/">Home</a>
-        {{#if loggedIn}}
-        <a href="/dashboard">Dashboard</a>
-        <button id="logout" class="btn-no-style">Logout</button>
-        {{else}}
-        <a href="/login">Login</a>
-        {{/if}}
-    </nav>
-    <main>
-        <div class="gallery">
+    <main style="background-color: var(--bs-success-bg-subtle)">
+        <div>
             {{{body}}}
         </div>
     </main>
     {{#if loggedIn}}
-    <script src="/js/logout.js"></script>
+    <script src="/public/js/logout.js"></script>
     {{/if}}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -1,36 +1,38 @@
-<div class="row justify-space-between-md">
-  <div class="login-card">
-    <h2 class="page-title">Login</h2>
-    <form class="form login-form">
-      <div class="form-group">
-        <label for="username-login">Username:</label>
-        <input class="form-input" type="text" id="username-login" />
-      </div>
-      <div class="form-group">
-        <label for="password-login">Password:</label>
-        <input class="form-input" type="password" id="password-login" />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">login</button>
-      </div>
-    </form>
+<section class="container">
+  <div class="row justify-space-between-md">
+    <div class="card col-5 m-4 p-3 align-content-around">
+      <h2 class="page-title mb-3">Login</h2>
+      <form class="form login-form mb-3">
+        <div class="form-group mb-3">
+          <label for="username-login" class="mr-3">Username:</label>
+          <input class="form-input" type="text" id="username-login" />
+        </div>
+        <div class="form-group mb-3">
+          <label for="password-login" class="mr-3">Password:</label>
+          <input class="form-input" type="password" id="password-login" />
+        </div>
+        <div class="form-group mb-3">
+          <button class="btn btn-success" type="submit">login</button>
+        </div>
+      </form>
+    </div>
+    <div class="card col-5 m-4 p-3 align-content-around">
+      <h2 class="page-title mb-3">Signup</h2>
+      <form class="form signup-form mb-3">
+        <div class="form-group mb-3">
+          <label for="username-signup" class="mr-3">Username:</label>
+          <input class="form-input" type="text" id="username-signup" />
+        </div>
+        <div class="form-group mb-3">
+          <label for="password-signup" class="mr-3">Password:</label>
+          <input class="form-input" type="password" id="password-signup" />
+        </div>
+        <div class="form-group mb-3">
+          <button class="btn btn-success" type="submit">signup</button>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="login-card">
-    <h2 class="page-title">Signup</h2>
-    <form class="form signup-form">
-      <div class="form-group">
-        <label for="username-signup">Username:</label>
-        <input class="form-input" type="text" id="username-signup" />
-      </div>
-      <div class="form-group">
-        <label for="password-signup">Password:</label>
-        <input class="form-input" type="password" id="password-signup" />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">signup</button>
-      </div>
-    </form>
-  </div>
-</div>
+</section>
 
-<script src="./js/login.js"></script>
+<script src="../public/js/login.js"></script>
