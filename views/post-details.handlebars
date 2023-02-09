@@ -1,0 +1,17 @@
+<section class="card">
+  <header class="d-flex justify-content-between flex-no-wrap">
+    <h4>{{title}}</h4>
+  </header>
+  <section class="card-body">
+    <p>{{username}}</p>
+    <p>{{createdDate}}</p>
+    <section class="card-body">
+      {{content}}
+    </section>
+    <ul class="list-group">
+      {{#each comments}}
+      {{>comment}}
+      {{/each}}
+    </ul>
+  </section>
+</section>
