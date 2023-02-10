@@ -1,3 +1,4 @@
+const path = require("path");
 const { Post } = require(path.join(__dirname, "../models"));
 
 const postdata = [

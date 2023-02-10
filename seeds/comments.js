@@ -1,3 +1,4 @@
+const path = require("path");
 const { Comment } = require(path.join(__dirname, "../models"));
 
 const commentdata = [

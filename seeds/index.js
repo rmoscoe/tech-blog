@@ -1,3 +1,4 @@
+const path = require("path");
 const sequelize = require(path.join(__dirname, '../config/connection'));
 const seedUser = require('./users');
 const seedPost = require('./posts');
