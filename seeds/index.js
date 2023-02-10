@@ -1,4 +1,4 @@
-const sequelize = require('../config/connection');
+const sequelize = require(path.join(__dirname, '../config/connection'));
 const seedUser = require('./users');
 const seedPost = require('./posts');
 const seedComment = require("./comments");
