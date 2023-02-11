@@ -5,7 +5,6 @@ const { User } = require(path.join(__dirname, '../../models'));
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { username: req.body.username } });
-    console.log(userData);
     if (!userData) {
       res
         .status(400)
@@ -14,13 +13,11 @@ router.post('/login', async (req, res) => {
     }
     const validPassword = userData.checkPassword(req.body.password, userData.dataValues.password)
       .then((result) => {
-        console.log(result);
         return result;
       })
       .catch((err) => {
         console.log(err);
       });
-    // const validPassword = await userData.checkPassword(req.body.password);
     
     if (!validPassword) {
       res
@@ -33,7 +30,7 @@ router.post('/login', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
       
-      res.status(200).redirect("/");
+      res.status(200).render("dashboard", {loggedIn: req.session.logged_in});
     });
 
   } catch (err) {
