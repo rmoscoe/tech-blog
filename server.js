@@ -8,7 +8,7 @@ const routes = require('./controllers');
 const sequelize = require('./config/connection');
 const dotenv = require("dotenv").config();
 const bcrypt = require("bcrypt");
-const connect = require("connect-session-sequelize")(session.Store);
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const auth = require("./utils/auth");
  
 const app = express();

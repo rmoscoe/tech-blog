@@ -1,3 +1,4 @@
+console.log("login script running");
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
