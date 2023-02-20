@@ -2,14 +2,9 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
-const mysql = require("mysql2/promise");
-const Sequelize = require("sequelize");
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
-const dotenv = require("dotenv").config();
-const bcrypt = require("bcrypt");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
-const auth = require("./utils/auth");
  
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -17,7 +12,7 @@ const PORT = process.env.PORT || 3001;
 const sess = {
   secret: process.env.SECRET,
   cookie: {
-    maxAge: 86400
+    maxAge: 86400000
   },
   store: new SequelizeStore({
     db: sequelize,
