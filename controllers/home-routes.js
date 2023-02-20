@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { User, Post, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 const scripts = [{ script: "../public/js/login.js" }];
+const { formatDate } = require("../utils/helpers");
 
 router.get("/", async (req, res) => {
     try {
@@ -15,6 +16,10 @@ router.get("/", async (req, res) => {
 
         const posts = postData.map((post) => {
             return post.get({ plain: true });
+        });
+        
+        posts.forEach((post) => {
+            post.createdDate = formatDate(post.createdDate);
         });
 
         res.render("homepage", {
@@ -37,20 +42,23 @@ router.get('/login', (req, res) => {
 });
 
 // User's posts (dashboard)
-router.get('/users/:user_id/posts', withAuth, async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
     try {
-        const postsData = await Post.findAll({
+        const postData = await Post.findAll({
             attributes: ["id", "title", "createdDate", "content"],
-            where: {
-                user_id: req.params.user_id
-            },
             include: [{
                 model: User,
                 attributes: ["username"]
             }]
         });
 
-        const posts = postsData.map((post) => post.get({ plain: true }));
+        const posts = postData.map((post) => {
+            return post.get({ plain: true });
+        });
+
+        posts.forEach((post) => {
+            post.createdDate = formatDate(post.createdDate);
+        });
 
         res.render('dashboard', {
             posts,
@@ -77,6 +85,8 @@ router.get('/posts/:id', withAuth, async (req, res) => {
 
         const post = postData.get({ plain: true });
 
+        post.createdDate = formatDate(post.createdDate);
+
         const commentData = await Comment.findAll({
             attributes: ["id", "dateCreated", "content"],
             where: {
@@ -89,6 +99,10 @@ router.get('/posts/:id', withAuth, async (req, res) => {
         });
 
         const comments = commentData.map((comment) => comment.get({ plain: true }));
+
+        comments.forEach((comment) => {
+            comment.dateCreated = formatDate(comment.dateCreated);
+        });
 
         res.render('post-details', {
             post,

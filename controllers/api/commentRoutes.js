@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const path = require("path");
 const { Comment } =  require(path.join(__dirname, "../../models"));
+const withAuth = require("../../utils/auth");
 
 // Create new comment
 router.post("/", withAuth, async (req, res) => {

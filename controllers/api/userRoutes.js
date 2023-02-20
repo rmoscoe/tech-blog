@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const path = require("path");
 const { User } = require(path.join(__dirname, '../../models'));
+const withAuth = require("../../utils/auth");
 
 // Create user record
 router.post("/", async (req, res) => {
