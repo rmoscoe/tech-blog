@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
         const posts = postData.map((post) => {
             return post.get({ plain: true });
         });
-        
+
         res.render("homepage", {
             posts,
             loggedIn: req.session.loggedIn
@@ -28,8 +28,8 @@ router.get("/", async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-    if (req.session.logged_in) {
-        res.render("dashboard");
+    if (req.session.loggedIn) {
+        res.redirect("/dashboard");
         return;
     }
 
@@ -37,7 +37,7 @@ router.get('/login', (req, res) => {
 });
 
 // User's posts (dashboard)
-router.get('/users/:user_id/posts', async (req, res) => {
+router.get('/users/:user_id/posts', withAuth, async (req, res) => {
     try {
         const postsData = await Post.findAll({
             attributes: ["id", "title", "createdDate", "content"],
@@ -62,7 +62,7 @@ router.get('/users/:user_id/posts', async (req, res) => {
 });
 
 // Post Details
-router.get('/posts/:id/comments', async (req, res) => {
+router.get('/posts/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.findOne({
             attributes: ["id", "title", "createdDate", "content"],
@@ -72,27 +72,27 @@ router.get('/posts/:id/comments', async (req, res) => {
             include: [{
                 model: User,
                 attributes: ["username"]
-            },
-            {
-                model: Comment,
-                attributes: ["id", "dateCreated", "content", "user_id"],
-                where: {
-                    post_id: req.params.id
-                },
-                include: [{
-                    model: User,
-                    attributes: ["username"],
-                    where: {
-                        id: "user_id"
-                    }
-                }]
             }]
         });
 
-        const entries = entryData.map((entry) => entry.get({ plain: true }));
+        const post = postData.get({ plain: true });
 
-        res.render('journal', {
-            entries,
+        const commentData = await Comment.findAll({
+            attributes: ["id", "dateCreated", "content"],
+            where: {
+                post_id: req.params.id
+            },
+            include: [{
+                model: User,
+                attributes: ["username"]
+            }]
+        });
+
+        const comments = commentData.map((comment) => comment.get({ plain: true }));
+
+        res.render('post-details', {
+            post,
+            comments,
             loggedIn: req.session.loggedIn,
         });
     } catch (err) {
@@ -100,20 +100,117 @@ router.get('/posts/:id/comments', async (req, res) => {
     };
 });
 
-// 
-router.get('/journals/:id/entries/:entry_id', async (req, res) => {
+// New Post Form
+router.get("/new-post", withAuth, async (req, res) => {
+    let update = false;
+
+    res.render("postform", {
+        loggedIn: req.session.loggedIn,
+        update
+    });
+});
+
+// Update Post Form
+router.get("/posts/:id/edit", withAuth, async (req, res) => {
+    let update = true;
+
     try {
-        const entryData = await Entry.findByPk(req.params.entry_id);
-
-        const entry = entryData.get({ plain: true });
-
-        res.render('entry-details', {
-            entry,
-            loggedIn: req.session.loggedIn,
+        const postData = await Post.findOne({
+            attributes: ["id", "title", "createdDate", "content"],
+            where: {
+                id: req.params.id
+            },
+            include: [{
+                model: User,
+                attributes: ["username"]
+            }]
         });
-    } catch (err) {
-        res.status(500).json(err);
-    };
+
+        const post = postData.get({ plain: true });
+
+        res.render("postform", {
+            loggedIn: req.session.loggedIn,
+            update,
+            post
+        });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+
 });
+
+// New Comment Form
+router.get("/posts/:post_id/add-comment", withAuth, async (req, res) => {
+    let commentForm = true;
+    let edit = false;
+
+    try {
+        const postData = await Post.findOne({
+            attributes: ["id", "title", "createdDate", "content"],
+            where: {
+                id: req.params.post_id
+            },
+            include: [{
+                model: User,
+                attributes: ["username"]
+            }]
+        });
+
+        const post = postData.get({ plain: true });
+
+        res.render("post-details", {
+            loggedIn: req.session.loggedIn,
+            commentForm,
+            edit,
+            post
+        })
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+// Update Comment Form
+router.get("/posts/:post_id/comments/:comment_id", withAuth, async (req, res) => {
+    let commentForm = true;
+    let edit = true;
+
+    try {
+        const postData = await Post.findOne({
+            attributes: ["id", "title", "createdDate", "content"],
+            where: {
+                id: req.params.post_id
+            },
+            include: [{
+                model: User,
+                attributes: ["username"]
+            }]
+        });
+
+        const post = postData.get({ plain: true });
+
+        const commentData = await Comment.findOne({
+            attributes: ["id", "dateCreated", "content"],
+            where: {
+                id: req.params.comment_id
+            },
+            include: [{
+                model: User,
+                attributes: ["username"]
+            }]
+        });
+
+        const comment = commentData.get({ plain: true });
+
+        res.render("post-details", {
+            loggedIn: req.session.loggedIn,
+            commentForm,
+            edit,
+            post,
+            comment
+        })
+    } catch (error) {
+        res.status(500).json(error);
+    }
+})
 
 module.exports = router;
