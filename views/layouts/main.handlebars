@@ -15,7 +15,7 @@
         crossorigin="anonymous">
 </head>
 
-<body>
+<body class="vh-100" style="background-color: var(--bs-success-bg-subtle)">
     <header style="background-color: var(--bs-success-text)">
         <h1 class="text-light text-center">The Tech Blog</h1>
         <nav class="navbar navbar-expand-lg"
@@ -25,14 +25,14 @@
                 {{#if loggedIn}}
                 <a href="/dashboard" class="text-light mx-4">Dashboard</a>
                 <button id="logout"
-                    class="btn-no-style text-light mx-4">Logout</button>
+                    class="btn btn-outline-light mx-4">Logout</button>
                 {{else}}
                 <a href="/login" class="text-light mx-4">Login</a>
                 {{/if}}
             </div>
         </nav>
     </header>
-    <main style="background-color: var(--bs-success-bg-subtle)">
+    <main>
         <div>
             {{{body}}}
         </div>

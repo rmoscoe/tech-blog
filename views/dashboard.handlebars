@@ -1,6 +1,14 @@
 <section class="container justify-content-center">
-    <button class="btn btn-primary">+</button>
+    <div class="d-flex flex-no-wrap p-2 justify-content-between">
+         <h2 class="fs-2" style="color: var(--bs-success-text)">Dashboard</h2>
+        <button class="btn text-light" style="background-color: var(--bs-success-text)">
+            <span class="text-light d-md-none">+</span>
+            <span class="text-light d-none d-md-block">Add Post</span>
+        </button>
+    </div>
     {{#each posts}}
     {{>post}}
     {{/each}}
 </section>
+
+<script src="../public/js/dashboard.js"></script>
