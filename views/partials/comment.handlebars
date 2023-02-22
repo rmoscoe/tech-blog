@@ -1,7 +1,17 @@
 <li class="list-group-item m-2 pb-3">
-    <p>
-        <span class="text-capitalize fw-semibold">{{user.username}}</span>
-        <span>{{dateCreated}}</span>
-    </p>
+    <div class="text-light p-1 d-flex flex-nowrap justify-content-between align-content-center" style="background-color:var(--bs-tertiary-color)">
+        <span class="text-capitalize fw-semibold align-self-center">{{user.username}}</span>
+        <span class="align-self-center">{{dateCreated}}</span>
+        {{#if author}}
+        <div class="my-0">
+            <button data-comment="{{id}}" class="btn btn-sm btn-light mx-2">
+            <i class="text-success fa-solid fa-pencil"></i>
+        </button>
+        <button data-comment="{{id}}" class="btn btn-sm btn-light">
+            <i class="text-success fa-regular fa-trash-can"></i>
+        </button>
+        </div>
+        {{/if}}
+    </div>
     <p>{{content}}</p>
 </li>

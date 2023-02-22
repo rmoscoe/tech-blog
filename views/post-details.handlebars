@@ -13,19 +13,22 @@
     {{/if}}
   </header>
   <section class="card-body bg-light">
-    <section class="card-body rounded shadow m-3 text-light"
-      style="background-color:var(--bs-success-text)">
-      <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
-        <p class="fs-5 mx-0 px-3 text-light text-capitalize fw-semibold">
+    <section class="card-body rounded shadow m-3 border">
+      <div class="d-flex flex-wrap flex-md-nowrap justify-content-between align-content-center text-light" style="background-color:var(--bs-success-text)">
+        <p class="fs-5 mx-0 px-3 text-light text-capitalize fw-semibold align-self-center">
           {{post.user.username}}</p>
-        <p class="fs-6 mx-0 px-3 text-end text-light">
+        <p class="fs-6 mx-0 px-3 text-end text-light align-self-center">
           {{post.createdDate}}</p>
       </div>
-      <div class="w-100 mx-0 px-3" style="text-align: justify">
+      <div class="w-100 mx-0 p-3 bg-light border" style="border-color:var(--bs-success-text) !important; text-align: justify">
         {{post.content}}
       </div>
     </section>
-    <ul class="list-group m-3">
+    <section class="d-flex flex-nowrap mt-3 mb-2 px-4 justify-content-between">
+      <h5 class="align-self-center" style="color: var(--bs-success-text)">Comments</h5>
+      <button class="btn btn-sm btn-success" style="background-color:var(--bs-success-text)">Add Comment</button>
+    </section>
+    <ul class="list-group mx-3">
       {{#each comments}}
       {{>comment}}
       {{/each}}
