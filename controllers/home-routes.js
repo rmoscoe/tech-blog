@@ -72,8 +72,10 @@ router.get('/dashboard', withAuth, async (req, res) => {
 // Post Details
 router.get('/posts/:id', withAuth, async (req, res) => {
     try {
+        let postAuthor = false;
+        
         const postData = await Post.findOne({
-            attributes: ["id", "title", "createdDate", "content"],
+            attributes: ["id", "title", "createdDate", "content", "user_id"],
             where: {
                 id: req.params.id
             },
@@ -87,8 +89,12 @@ router.get('/posts/:id', withAuth, async (req, res) => {
 
         post.createdDate = formatDate(post.createdDate);
 
+        if (post.user_id === req.session.user_id) {
+            postAuthor = true;
+        }
+
         const commentData = await Comment.findAll({
-            attributes: ["id", "dateCreated", "content"],
+            attributes: ["id", "dateCreated", "content", "user_id"],
             where: {
                 post_id: req.params.id
             },
@@ -102,10 +108,15 @@ router.get('/posts/:id', withAuth, async (req, res) => {
 
         comments.forEach((comment) => {
             comment.dateCreated = formatDate(comment.dateCreated);
+            comment.author = false;
+            if (comment.user_id === req.session.user_id) {
+                comment.author = true;
+            }
         });
-
+        
         res.render('post-details', {
             post,
+            postAuthor,
             comments,
             loggedIn: req.session.loggedIn,
         });
