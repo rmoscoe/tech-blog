@@ -1,9 +1,17 @@
 <section class="card my-3">
-  <a href="/posts/{{id}}" class="d-flex justify-content-between flex-wrap text-decoration-none p-0" style="background-color: var(--bs-dark-text)">
-    <header class="text-light align-self-center fs-3 w-100 px-2 py-1 m-0">{{title}}</header>
-    <div class="d-flex card-body align-content-center justify-content-between flex-no-wrap py-1 m-0">
-      <p class="fs-6 align-self-start text-light px-2 py-0 mx-0">Posted by {{user.username}}</p>
-      <p class="fs-6 align-self-end text-light px-2  py-0 mx-0">{{createdDate}}</p>
+  <a href="/posts/{{id}}"
+    class="d-flex justify-content-between flex-wrap text-decoration-none p-0"
+    style="background-color: var(--bs-dark-text)">
+    <header
+      class="text-light align-self-center fs-3 w-100 px-2 py-1 m-0 text-capitalize">
+      {{title}}</header>
+    <div
+      class="d-flex card-body align-content-center justify-content-between flex-no-wrap py-1 m-0">
+      <p class="fs-6 align-self-start text-light px-2 py-0 mx-0">Posted by
+        <span class="text-capitalize">{{user.username}}</span>
+      </p>
+      <p class="fs-6 align-self-end text-light px-2  py-0 mx-0">{{createdDate}}
+      </p>
     </div>
   </a>
 </section>

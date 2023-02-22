@@ -88,7 +88,7 @@ router.get('/posts/:id', withAuth, async (req, res) => {
         const post = postData.get({ plain: true });
 
         post.createdDate = formatDate(post.createdDate);
-
+        
         if (post.user_id === req.session.user_id) {
             postAuthor = true;
         }
@@ -112,6 +112,7 @@ router.get('/posts/:id', withAuth, async (req, res) => {
             if (comment.user_id === req.session.user_id) {
                 comment.author = true;
             }
+
         });
         
         res.render('post-details', {

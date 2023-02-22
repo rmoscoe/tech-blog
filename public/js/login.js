@@ -42,6 +42,16 @@ const signupFormHandler = async (event) => {
   }
 };
 
+const inputFields = document.querySelectorAll('.login-form-input');
+
+// inputFields.forEach((field) => {
+//   field.addEventListener('keydown', (event) => {
+//     if (event.key === 'Enter') {
+//       event.preventDefault();
+//       loginForm.dispatchEvent(new Event('submit'));
+//     }
+//   });
+// });
 
 loginForm.addEventListener('submit', loginFormHandler);
 
