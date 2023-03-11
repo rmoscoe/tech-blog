@@ -12,11 +12,12 @@ router.post("/", async (req, res) => {
     });
 
     const {id} = userData.get({ plain: true });
-
+    
     req.session.save(() => {
+    
       req.session.user_id = id;
       req.session.loggedIn = true;
-
+      
       res.status(200).redirect("../dashboard");
     })
   } catch (error) {
@@ -34,26 +35,21 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Incorrect username or password, please try again' });
       return;
     }
-    const validPassword = userData.checkPassword(req.body.password, userData.dataValues.password)
-      .then((result) => {
-        return result;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    
+    const validPassword = await userData.checkPassword(req.body.password, userData.dataValues.password);
+
     if (!validPassword) {
       res
         .status(400)
         .json({ message: 'Incorrect username or password, please try again' });
       return;
     }
-
+    
+    req.session.user_id = userData.dataValues.id;
+    req.session.loggedIn = true;
+  
     req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.loggedIn = true;
       
-      res.status(200).render("dashboard", {loggedIn: req.session.loggedIn});
+      res.status(200).redirect("../../../dashboard");
     });
 
   } catch (err) {
