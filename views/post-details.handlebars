@@ -28,6 +28,9 @@
       <h5 class="align-self-center" style="color: var(--bs-success-text)">Comments</h5>
       <button id="add-comment" class="btn btn-sm btn-success" style="background-color:var(--bs-success-text)">Add Comment</button>
     </section>
+    {{#if commentForm}}
+    {{>commentform}}
+    {{/if}}
     <ul class="list-group mx-3">
       {{#each comments}}
       {{>comment}}

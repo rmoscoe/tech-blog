@@ -3,10 +3,20 @@
     <form class="form">
       <div class="form-group">
         <label for="comment-body">Comment:</label>
-        <textarea class="form-input" rows="5" cols="255" id="comment-body" name="comment-body" />
+        <textarea class="form-input w-100" rows="5" id="comment-body" name="comment-body"
+        {{#if edit}}
+        value="{{comment.content}}"
+        {{/if}}
+        ></textarea>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <input id="submit-comment" class="btn text-white" type="submit" value="Submit" style="background-color: var(--bs-success-text)"/>
       </div>
     </form>
   </div>
+
+  {{#if edit}}
+  <script src="/js/editComment.js" type="text/javascript"></script>
+  {{else}}
+  <script src="/js/createComment.js" type="text/javascript"></script>
+  {{/if}}

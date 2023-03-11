@@ -180,6 +180,13 @@ router.get("/posts/:post_id/add-comment", withAuth, async (req, res) => {
             include: [{
                 model: User,
                 attributes: ["username"]
+            }, {
+                model: Comment,
+                attributes: ["id", "dateCreated", "content"],
+                include: [{
+                    model: User,
+                    attributes: ["username"]
+                }]
             }]
         });
 
