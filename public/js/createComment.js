@@ -1,18 +1,20 @@
 async function createComment(event) {
     event.preventDefault();
 
+    const url = window.location.toString().split('/');
+    const postId = url[url.length - 2];
     const content = document.querySelector('#comment-body').value;
         
     if (content) {
         const response = await fetch('/api/comments', {
             method: 'POST',
-            body: JSON.stringify({ content }),
+            body: JSON.stringify({ content, postId }),
             headers: { 'Content-Type': 'application/json' },
         });
         console.log(response);
 
         if (response.ok) {
-            window.location.href = '..';
+            window.location.href = `../${postId}`;
         } else {
             alert("Failed to create comment");
         }

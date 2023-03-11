@@ -8,7 +8,7 @@ async function updatePost(event) {
     
     if (title && body) {
         const updates = { title, body };
-        const response = await fetch(`/api/posts${id}`, {
+        const response = await fetch(`/api/posts/${id}`, {
             method: 'PUT',
             body: JSON.stringify(updates),
             headers: { 'Content-Type': 'application/json' },
@@ -16,9 +16,9 @@ async function updatePost(event) {
         console.log(response);
 
         if (response.ok) {
-            window.location.href = "..";
+            window.location.href = "../../dashboard";
         } else {
-            alert("Failed to create post");
+            alert("Failed to update post");
         }
     } else {
         console.error("Missing title or body");

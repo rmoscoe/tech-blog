@@ -9,7 +9,7 @@ router.post("/", withAuth, async (req, res) => {
         const comment = await Comment.create({
             content: req.body.content,
             user_id: req.session.user_id,
-            post_id: req.body.id
+            post_id: req.body.postId
         });
 
         res.status(200).json(comment);
@@ -21,8 +21,8 @@ router.post("/", withAuth, async (req, res) => {
 // Update existing comment
 router.put("/:id", withAuth, async (req, res) => {
     try {
-        const content = req.body.update;
-
+        const content = req.body.content;
+        
         const comment = await Comment.update({
             content
         }, {
