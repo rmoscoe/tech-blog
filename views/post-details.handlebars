@@ -3,10 +3,10 @@
     <h4 class="text-light text-capitalize fw-bold align-self-center">{{post.title}}</h4>
     {{#if postAuthor}}
     <div>
-      <button class="btn btn-light m-2">
+      <button id="edit-post-button" class="btn btn-light m-2">
         <i class="text-success fa-solid fa-pencil"></i>
       </button>
-      <button class="btn btn-light">
+      <button id="delete-post-button" class="btn btn-light">
         <i class="text-success fa-regular fa-trash-can"></i>
       </button>
     </div>
@@ -26,7 +26,7 @@
     </section>
     <section class="d-flex flex-nowrap mt-3 mb-2 px-4 justify-content-between">
       <h5 class="align-self-center" style="color: var(--bs-success-text)">Comments</h5>
-      <button class="btn btn-sm btn-success" style="background-color:var(--bs-success-text)">Add Comment</button>
+      <button id="add-comment" class="btn btn-sm btn-success" style="background-color:var(--bs-success-text)">Add Comment</button>
     </section>
     <ul class="list-group mx-3">
       {{#each comments}}
