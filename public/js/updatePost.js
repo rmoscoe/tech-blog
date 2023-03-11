@@ -4,10 +4,10 @@ async function updatePost(event) {
     const id = url[url.length - 2];
 
     const title = document.querySelector('#post-title').value;
-    const body = document.querySelector('#post-body').value;
+    const content = document.querySelector('#post-body').value;
     
-    if (title && body) {
-        const updates = { title, body };
+    if (title && content) {
+        const updates = { title, content };
         const response = await fetch(`/api/posts/${id}`, {
             method: 'PUT',
             body: JSON.stringify(updates),
@@ -16,7 +16,7 @@ async function updatePost(event) {
         console.log(response);
 
         if (response.ok) {
-            window.location.href = "../../dashboard";
+            window.location.href = "/dashboard";
         } else {
             alert("Failed to update post");
         }
