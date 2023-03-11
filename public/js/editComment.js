@@ -1,7 +1,6 @@
 async function updateComment(event) {
     event.preventDefault();
     const url = window.location.toString().split('/');
-    const post_id = url[url.length - 3];
     const comment_id = url[url.length - 1];
 
     const content = document.querySelector('#comment-body').value;
