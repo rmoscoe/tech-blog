@@ -42,17 +42,6 @@ const signupFormHandler = async (event) => {
   }
 };
 
-// const inputFields = document.querySelectorAll('.login-form-input');
-
-// inputFields.forEach((field) => {
-//   field.addEventListener('keyup', (event) => {
-//     if (event.key === 'Enter') {
-//       event.preventDefault();
-//       loginForm.submit();
-//     }
-//   });
-// });
-
 document.getElementById("login-form").addEventListener('submit', loginFormHandler);
 
 document
