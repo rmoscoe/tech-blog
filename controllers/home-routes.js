@@ -154,6 +154,7 @@ router.get("/posts/:id/edit", withAuth, async (req, res) => {
         });
 
         const post = postData.get({ plain: true });
+        console.log(post);
 
         res.render("postform", {
             loggedIn: req.session.loggedIn,
@@ -172,32 +173,60 @@ router.get("/posts/:post_id/add-comment", withAuth, async (req, res) => {
     let edit = false;
 
     try {
+        let postAuthor = false;
+        
         const postData = await Post.findOne({
-            attributes: ["id", "title", "createdDate", "content"],
+            attributes: ["id", "title", "createdDate", "content", "user_id"],
             where: {
                 id: req.params.post_id
             },
             include: [{
                 model: User,
                 attributes: ["username"]
-            }, {
-                model: Comment,
-                attributes: ["id", "dateCreated", "content"],
-                include: [{
-                    model: User,
-                    attributes: ["username"]
-                }]
             }]
         });
 
         const post = postData.get({ plain: true });
+        
 
-        res.render("post-details", {
+        post.createdDate = formatDate(post.createdDate);
+        console.log(post);
+        if (post.user_id === req.session.user_id) {
+            postAuthor = true;
+        }
+        
+        const commentData = await Comment.findAll({
+            attributes: ["id", "dateCreated", "content", "user_id"],
+            where: {
+                post_id: req.params.post_id
+            },
+            include: [{
+                model: User,
+                attributes: ["username"]
+            }]
+        });
+
+        const comments = commentData.map((comment) => comment.get({ plain: true }));
+
+        comments.forEach((comment) => {
+            comment.dateCreated = formatDate(comment.dateCreated);
+            comment.author = false;
+            if (comment.user_id === req.session.user_id) {
+                comment.author = true;
+            }
+
+        });
+        console.log(comments);
+        
+        res.render('post-details', {
+            post,
+            postAuthor,
+            comments,
             loggedIn: req.session.loggedIn,
             commentForm,
-            edit,
-            post
-        })
+            edit
+        });
+        
     } catch (error) {
         res.status(500).json(error);
     }

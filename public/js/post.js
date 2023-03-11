@@ -1,5 +1,7 @@
 function editPostHandler () {
-    document.location.replace("/edit");
+    const url = window.location.toString().split('/');
+    const id = url[url.length - 1];
+    document.location.replace(`./${id}/edit`);
 }
 
 async function deletePostHandler () {
