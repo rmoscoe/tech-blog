@@ -5,7 +5,6 @@ async function updateComment(event) {
     const post_id = url[url.length - 3];
 
     const content = document.querySelector('#comment-body').value;
-    console.log(content);
     
     if (content) {
         const update = { content };
@@ -14,7 +13,6 @@ async function updateComment(event) {
             body: JSON.stringify(update),
             headers: { 'Content-Type': 'application/json' },
         });
-        console.log(response);
 
         if (response.ok) {
             window.location.href = `/posts/${post_id}`;

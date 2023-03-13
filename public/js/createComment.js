@@ -11,7 +11,6 @@ async function createComment(event) {
             body: JSON.stringify({ content, postId }),
             headers: { 'Content-Type': 'application/json' },
         });
-        console.log(response);
 
         if (response.ok) {
             window.location.href = `../${postId}`;

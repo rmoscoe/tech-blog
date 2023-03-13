@@ -13,7 +13,6 @@ async function updatePost(event) {
             body: JSON.stringify(updates),
             headers: { 'Content-Type': 'application/json' },
         });
-        console.log(response);
 
         if (response.ok) {
             window.location.href = "/dashboard";

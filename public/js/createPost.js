@@ -10,7 +10,6 @@ async function createPost(event) {
             body: JSON.stringify({ title, body }),
             headers: { 'Content-Type': 'application/json' },
         });
-        console.log(response);
 
         if (response.ok) {
             window.location.href = '/dashboard';

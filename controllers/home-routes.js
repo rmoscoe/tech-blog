@@ -44,7 +44,6 @@ router.get('/login', (req, res) => {
 // User's posts (dashboard)
 router.get('/dashboard', withAuth, async (req, res) => {
     try {
-        console.log("Logged In? ", req.session.loggedIn);
         const postData = await Post.findAll({
             attributes: ["id", "title", "createdDate", "content"],
             include: [{
@@ -52,7 +51,6 @@ router.get('/dashboard', withAuth, async (req, res) => {
                 attributes: ["username"]
             }]
         });
-        console.log(postData);
         const posts = postData.map((post) => {
             return post.get({ plain: true });
         });
@@ -190,7 +188,6 @@ router.get("/posts/:post_id/add-comment", withAuth, async (req, res) => {
         
 
         post.createdDate = formatDate(post.createdDate);
-        console.log(post);
         if (post.user_id === req.session.user_id) {
             postAuthor = true;
         }
