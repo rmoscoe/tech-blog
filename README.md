@@ -104,7 +104,7 @@ This project gave me an opportunity to learn several concepts and skills:
 
 ### Ryan Moscoe 
 
-* [Portfolio](https://rmoscoe.github.io/portfolio/)
+* [Portfolio](https://rmoscoe.github.io/my-sportfolio/)
 * [LinkedIn](https://www.linkedin.com/in/ryan-moscoe-8652973/)
 * [Github](https://github.com/rmoscoe)
 
